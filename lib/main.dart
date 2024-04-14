@@ -15,19 +15,35 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Basic",
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            "Basic",
-            style: TextStyle(
-              fontSize: 32,
-              color: Colors.white,
+      home: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text(
+              "Basic",
+              style: TextStyle(
+                fontSize: 32,
+                color: Colors.white,
+              ),
             ),
+            backgroundColor: Colors.purple.shade300,
           ),
-          backgroundColor: Colors.purple.shade300,
+          body: const TabBarView(
+            children: [
+              Home(),
+              TapboxA(),
+              Text('Hello World',
+                  style: TextStyle(fontSize: 16, color: Colors.black87)),
+            ],
+          ),
+          bottomNavigationBar: const TabBar(
+            tabs: [
+              Tab(icon: Icon(Icons.directions_car)),
+              Tab(icon: Icon(Icons.directions_transit)),
+              Tab(icon: Icon(Icons.directions_bike)),
+            ],
+          ),
         ),
-        body: const Home(),
       ),
     );
   }
@@ -51,29 +67,27 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: Colors.blue,
+    return SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const Text('Hello World',
-                style: TextStyle(fontSize: 46, color: Colors.black87)),
-            const SizedBox(
-                height: 300,
-                child: Image(
-                    image: AssetImage('assets/image1.webp'),
-                    fit: BoxFit.cover)),
-            const ListWidget(),
-            const TapboxA(),
-            TapboxB(
-              active: _active,
-              onChanged: _handleTapboxChanged,
-            ),
-            TapboxC(
-              active: _active,
-              onChanged: _handleTapboxChanged,
-            )
-          ],
-        ));
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        const Text('Hello World',
+            style: TextStyle(fontSize: 46, color: Colors.black87)),
+        const SizedBox(
+            height: 300,
+            child: Image(
+                image: AssetImage('assets/image1.webp'), fit: BoxFit.cover)),
+        const ListWidget(),
+        const TapboxA(),
+        TapboxB(
+          active: _active,
+          onChanged: _handleTapboxChanged,
+        ),
+        TapboxC(
+          active: _active,
+          onChanged: _handleTapboxChanged,
+        )
+      ],
+    ));
   }
 }
